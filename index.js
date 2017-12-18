@@ -99,7 +99,7 @@ var GridStackItemComponent = (function () {
         if (this.option.noResize != null && this.option.noResize == true) {
             renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
         }
-        if (!this.option.visible === false) {
+        if (this.option.visible === false) {
             this.renderer.setElementClass(this.nativeElement, "hidden", true);
         }
         if (this.option.itemId) {
