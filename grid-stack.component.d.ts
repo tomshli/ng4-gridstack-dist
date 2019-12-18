@@ -1,8 +1,7 @@
 import { QueryList, ElementRef, Renderer, AfterContentInit } from '@angular/core';
 import { GridStackOptions } from './grid-stack-options.model';
 import { GridStackItemComponent } from './grid-stack-item.component';
-import 'jquery';
-import 'gridstack';
+import 'gridstack/dist/gridstack';
 export declare class GridStackComponent implements AfterContentInit {
     private el;
     private renderer;

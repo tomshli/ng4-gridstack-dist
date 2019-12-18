@@ -1,5 +1,5 @@
-import 'gridstack';
-export declare class GridStackOptions implements IGridstackOptions {
+import 'gridstack/dist/gridstack';
+export declare class GridStackOptions implements GridStackOptions {
     acceptWidgets: boolean;
     alwaysShowResizeHandle: boolean;
     animate: boolean;

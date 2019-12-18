@@ -1,7 +1,6 @@
 import { Component, ContentChildren, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output, Pipe, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import 'gridstack';
-import 'jquery';
+import 'gridstack/dist/gridstack';
 import { each } from 'lodash';
 
 var GridStackOptions = (function () {

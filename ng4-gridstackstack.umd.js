@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack'), require('jquery'), require('lodash')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack', 'jquery', 'lodash'], factory) :
-	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,null,global._));
-}(this, (function (exports,core,common,gridstack,jquery,_) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack/dist/gridstack'), require('lodash')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack/dist/gridstack', 'lodash'], factory) :
+	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,global._));
+}(this, (function (exports,core,common,gridstack,_) { 'use strict';
 
 var GridStackOptions = (function () {
     function GridStackOptions() {
