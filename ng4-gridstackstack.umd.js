@@ -1,8 +1,10 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack/dist/gridstack'), require('lodash')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack/dist/gridstack', 'lodash'], factory) :
-	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,global._));
-}(this, (function (exports,core,common,gridstack,_) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack/dist/gridstack'), require('jquery'), require('lodash')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack/dist/gridstack', 'jquery', 'lodash'], factory) :
+	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,global.jqueryProxy,global._));
+}(this, (function (exports,core,common,gridstack,jqueryProxy,_) { 'use strict';
+
+var jqueryProxy__default = jqueryProxy['default'];
 
 var GridStackOptions = (function () {
     function GridStackOptions() {
@@ -169,6 +171,7 @@ GridStackItemComponent.propDecorators = {
     'onGridConfigurationChanged': [{ type: core.Output },],
 };
 
+var jquery = jqueryProxy__default || jqueryProxy;
 var GridStackComponent = (function () {
     /**
      * @param {?} el
@@ -257,7 +260,7 @@ var GridStackComponent = (function () {
             this.options.resizable = true;
         this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
         this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
-        this.gridStack = jQuery(nativeElement).gridstack(this.options);
+        this.gridStack = jquery(nativeElement).gridstack(this.options);
         this.grid = this.gridStack.data("gridstack");
         this.gridStack.on("change", function (e, items) {
             _.each(items, function (item) { return _this.widgetChanged(item); });

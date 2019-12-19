@@ -1,6 +1,8 @@
 import { Component, ContentChildren, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output, Pipe, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'gridstack/dist/gridstack';
+import * as jqueryProxy from 'jquery';
+import jqueryProxy__default from 'jquery';
 import { each } from 'lodash';
 
 var GridStackOptions = (function () {
@@ -168,6 +170,7 @@ GridStackItemComponent.propDecorators = {
     'onGridConfigurationChanged': [{ type: Output },],
 };
 
+var jquery = jqueryProxy__default || jqueryProxy;
 var GridStackComponent = (function () {
     /**
      * @param {?} el
@@ -256,7 +259,7 @@ var GridStackComponent = (function () {
             this.options.resizable = true;
         this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
         this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
-        this.gridStack = jQuery(nativeElement).gridstack(this.options);
+        this.gridStack = jquery(nativeElement).gridstack(this.options);
         this.grid = this.gridStack.data("gridstack");
         this.gridStack.on("change", function (e, items) {
             each(items, function (item) { return _this.widgetChanged(item); });
