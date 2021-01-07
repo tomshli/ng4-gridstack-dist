@@ -1,4 +1,4 @@
-import { QueryList, ElementRef, Renderer, AfterContentInit } from '@angular/core';
+import { QueryList, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { GridStackOptions } from './grid-stack-options.model';
 import { GridStackItemComponent } from './grid-stack-item.component';
 import 'gridstack/dist/gridstack';
@@ -9,7 +9,7 @@ export declare class GridStackComponent implements AfterContentInit {
     items: QueryList<GridStackItemComponent>;
     private gridStack;
     private grid;
-    constructor(el: ElementRef, renderer: Renderer);
+    constructor(el: ElementRef, renderer: Renderer2);
     makeWidget(item: GridStackItemComponent): void;
     updateWidget(item: GridStackItemComponent): void;
     enableMove(doEnable: boolean, includeNewWidgets: boolean): void;

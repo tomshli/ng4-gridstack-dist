@@ -1,4 +1,4 @@
-import { OnInit, ComponentRef, ElementRef, Renderer, EventEmitter, OnDestroy, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { OnInit, ComponentRef, ElementRef, Renderer2, EventEmitter, OnDestroy, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { GridStackItem } from './grid-stack-item.model';
 export declare class GridStackItemComponent implements OnInit, OnDestroy, AfterViewInit {
     private el;
@@ -10,7 +10,7 @@ export declare class GridStackItemComponent implements OnInit, OnDestroy, AfterV
     contentComponentRef: ComponentRef<any>;
     jGridRef: any;
     jWidgetRef: any;
-    constructor(el: ElementRef, renderer: Renderer);
+    constructor(el: ElementRef, renderer: Renderer2);
     readonly nativeElement: HTMLElement;
     ngOnInit(): void;
     UpdateWidget(item: GridStackItem): void;
