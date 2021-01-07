@@ -1,0 +1,19 @@
+{
+  "name": "ng4-gridstack",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.13",
+    "@angular/core": "^9.1.13"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "bundles/ng4-gridstack.umd.js",
+  "module": "fesm2015/ng4-gridstack.js",
+  "es2015": "fesm2015/ng4-gridstack.js",
+  "esm2015": "esm2015/ng4-gridstack.js",
+  "fesm2015": "fesm2015/ng4-gridstack.js",
+  "typings": "ng4-gridstack.d.ts",
+  "metadata": "ng4-gridstack.metadata.json",
+  "sideEffects": false
+}
