@@ -1,17 +1,17 @@
-import { Component, ContentChildren, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output, Pipe, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ContentChildren, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output, Pipe, QueryList, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'gridstack/dist/gridstack';
 import * as jqueryProxy from 'jquery';
 import jqueryProxy__default from 'jquery';
 import { each } from 'lodash';
 
-var GridStackOptions = (function () {
+var GridStackOptions = /** @class */ (function () {
     function GridStackOptions() {
     }
     return GridStackOptions;
 }());
 
-var GridStackItem = (function () {
+var GridStackItem = /** @class */ (function () {
     function GridStackItem() {
         this.x = 0;
         this.y = 0;
@@ -21,12 +21,8 @@ var GridStackItem = (function () {
         this.autoPosition = false;
         this.visible = true;
     }
-    /**
-     * @param {?} widget
-     * @return {?}
-     */
     GridStackItem.Clone = function (widget) {
-        var /** @type {?} */ result = new GridStackItem();
+        var result = new GridStackItem();
         result.autoPosition = widget.autoPosition;
         result.itemId = widget.itemId;
         result.el = widget.el;
@@ -46,11 +42,16 @@ var GridStackItem = (function () {
     return GridStackItem;
 }());
 
-var GridStackItemComponent = (function () {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     */
+var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var GridStackItemComponent = /** @class */ (function () {
     function GridStackItemComponent(el, renderer) {
         this.el = el;
         this.renderer = renderer;
@@ -61,31 +62,17 @@ var GridStackItemComponent = (function () {
         this.jWidgetRef = el.nativeElement;
     }
     Object.defineProperty(GridStackItemComponent.prototype, "nativeElement", {
-        /**
-         * @return {?}
-         */
         get: function () {
             return this.el.nativeElement;
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
     GridStackItemComponent.prototype.ngOnInit = function () {
         this.RenderWidget(null);
     };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackItemComponent.prototype.UpdateWidget = function (item) {
     };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackItemComponent.prototype.RenderWidget = function (item) {
         if (item != null)
             this.option = item;
@@ -114,13 +101,6 @@ var GridStackItemComponent = (function () {
             //this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
         }
     };
-    /**
-     * @param {?} x
-     * @param {?} y
-     * @param {?} width
-     * @param {?} height
-     * @return {?}
-     */
     GridStackItemComponent.prototype.update = function (x, y, width, height) {
         // console.log("here");
         if (x === this.option.x && y === this.option.y && width === this.option.width && height === this.option.height)
@@ -130,13 +110,10 @@ var GridStackItemComponent = (function () {
             this.option.y = y;
             this.option.width = width;
             this.option.height = height;
-            var /** @type {?} */ optionNew = GridStackItem.Clone(this.option);
+            var optionNew = GridStackItem.Clone(this.option);
             this.onGridConfigurationChanged.emit(optionNew);
         }
     };
-    /**
-     * @return {?}
-     */
     GridStackItemComponent.prototype.ngAfterViewInit = function () {
         //if (!!this.contentTemplate) {
         //    this.componentService.getDynamicComponentFactory({
@@ -148,41 +125,47 @@ var GridStackItemComponent = (function () {
         //        })
         //}
     };
-    /**
-     * @return {?}
-     */
     GridStackItemComponent.prototype.ngOnDestroy = function () {
         if (this.contentComponentRef !== null)
             this.contentComponentRef.destroy();
     };
+    __decorate$2([
+        ViewChild("contentPlaceholder", { read: ViewContainerRef }),
+        __metadata$1("design:type", ViewContainerRef)
+    ], GridStackItemComponent.prototype, "contentPlaceholder", void 0);
+    __decorate$2([
+        Input(),
+        __metadata$1("design:type", String)
+    ], GridStackItemComponent.prototype, "contentTemplate", void 0);
+    __decorate$2([
+        Input(),
+        __metadata$1("design:type", GridStackItem)
+    ], GridStackItemComponent.prototype, "option", void 0);
+    __decorate$2([
+        Output(),
+        __metadata$1("design:type", Object)
+    ], GridStackItemComponent.prototype, "onGridConfigurationChanged", void 0);
+    GridStackItemComponent = __decorate$2([
+        Component({
+            selector: 'grid-stack-item',
+            template: "<div class=\"grid-stack-item-content\">\n              <div #contentPlaceholder *ngIf=\"contentTemplate\"></div>\n              <ng-content *ngIf=\"!contentTemplate\"></ng-content>\n            </div>"
+        }),
+        __metadata$1("design:paramtypes", [ElementRef, Renderer2])
+    ], GridStackItemComponent);
     return GridStackItemComponent;
 }());
-GridStackItemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'grid-stack-item',
-                template: "<div class=\"grid-stack-item-content\">\n              <div #contentPlaceholder *ngIf=\"contentTemplate\"></div>\n              <ng-content *ngIf=\"!contentTemplate\"></ng-content>\n            </div>"
-            },] },
-];
-/**
- * @nocollapse
- */
-GridStackItemComponent.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer2, },
-]; };
-GridStackItemComponent.propDecorators = {
-    'contentPlaceholder': [{ type: ViewChild, args: ["contentPlaceholder", { read: ViewContainerRef },] },],
-    'contentTemplate': [{ type: Input },],
-    'option': [{ type: Input },],
-    'onGridConfigurationChanged': [{ type: Output },],
-};
 
+var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var jquery = jqueryProxy__default || jqueryProxy;
-var GridStackComponent = (function () {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     */
+var GridStackComponent = /** @class */ (function () {
     function GridStackComponent(el, renderer) {
         this.el = el;
         this.renderer = renderer;
@@ -190,10 +173,6 @@ var GridStackComponent = (function () {
         this.gridStack = null;
         this.grid = null;
     }
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackComponent.prototype.makeWidget = function (item) {
         //let widget = this.grid.makeWidget(item.nativeElement);
         item.jGridRef = this.grid;
@@ -205,29 +184,16 @@ var GridStackComponent = (function () {
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     };
     
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackComponent.prototype.updateWidget = function (item) {
         this.grid.resizable(item.nativeElement, true);
         this.grid.move(item.nativeElement, item.option.x, item.option.y);
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     };
-    /**
-     * @param {?} doEnable
-     * @param {?} includeNewWidgets
-     * @return {?}
-     */
     GridStackComponent.prototype.enableMove = function (doEnable, includeNewWidgets) {
         this.grid.enableMove(doEnable, includeNewWidgets);
     };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackComponent.prototype.AddWidget = function (item) {
-        var /** @type {?} */ widget = this.grid.makeWidget(item.nativeElement);
+        var widget = this.grid.makeWidget(item.nativeElement);
         item.jGridRef = this.grid;
         //item.jWidgetRef = widget;
         if (item.option != null && item.option.noResize != null && item.option.noResize == true)
@@ -236,20 +202,13 @@ var GridStackComponent = (function () {
         this.grid.move(item.nativeElement, item.option.x, item.option.y);
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
     GridStackComponent.prototype.RemoveWidget = function (item) {
-        var /** @type {?} */ widget = this.grid.removeWidget(item.nativeElement, false);
+        var widget = this.grid.removeWidget(item.nativeElement, false);
     };
-    /**
-     * @return {?}
-     */
     GridStackComponent.prototype.ngAfterContentInit = function () {
         var _this = this;
-        var /** @type {?} */ that = this;
-        var /** @type {?} */ nativeElement = this.el.nativeElement;
+        var that = this;
+        var nativeElement = this.el.nativeElement;
         if (this.options == null)
             this.options = new GridStackOptions();
         if (this.options.cellHeight == null)
@@ -276,139 +235,138 @@ var GridStackComponent = (function () {
         // Initialize widgets
         this.items.forEach(function (item) { return that.makeWidget(item); });
     };
-    /**
-     * @param {?} change
-     * @return {?}
-     */
     GridStackComponent.prototype.widgetChanged = function (change) {
         console.log(change);
         //  debugger;
         //console.log(change);
-        var /** @type {?} */ jWidget = change.el;
-        var /** @type {?} */ gridStackItem = this.items.find(function (item) { return item.jWidgetRef !== null ? item.jWidgetRef === jWidget[0] : false; });
+        var jWidget = change.el;
+        var gridStackItem = this.items.find(function (item) { return item.jWidgetRef !== null ? item.jWidgetRef === jWidget[0] : false; });
         if (!gridStackItem)
             return;
         gridStackItem.update(change.x, change.y, change.width, change.height);
     };
+    __decorate$1([
+        Input(),
+        __metadata("design:type", GridStackOptions)
+    ], GridStackComponent.prototype, "options", void 0);
+    __decorate$1([
+        ContentChildren(GridStackItemComponent),
+        __metadata("design:type", QueryList)
+    ], GridStackComponent.prototype, "items", void 0);
+    GridStackComponent = __decorate$1([
+        Component({
+            selector: 'grid-stack',
+            template: "<ng-content></ng-content>",
+            styles: [":host { display: block; }"]
+        }),
+        __metadata("design:paramtypes", [ElementRef, Renderer2])
+    ], GridStackComponent);
     return GridStackComponent;
 }());
-GridStackComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'grid-stack',
-                template: "<ng-content></ng-content>",
-                styles: [":host { display: block; }"]
-            },] },
-];
-/**
- * @nocollapse
- */
-GridStackComponent.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer2, },
-]; };
-GridStackComponent.propDecorators = {
-    'options': [{ type: Input },],
-    'items': [{ type: ContentChildren, args: [GridStackItemComponent,] },],
-};
 
-var GridStackDirective = (function () {
-    /**
-     * @param {?} el
-     */
+var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var GridStackDirective = /** @class */ (function () {
     function GridStackDirective(el) {
         this.el = el;
     }
+    GridStackDirective = __decorate$3([
+        Directive({
+            selector: '[gridStackDirective]'
+        }),
+        __metadata$2("design:paramtypes", [ElementRef])
+    ], GridStackDirective);
     return GridStackDirective;
 }());
-GridStackDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[gridStackDirective]'
-            },] },
-];
-/**
- * @nocollapse
- */
-GridStackDirective.ctorParameters = function () { return [
-    { type: ElementRef, },
-]; };
 
+var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 /**
  * Transforms any input value
  */
-var GridStackPipe = (function () {
+var GridStackPipe = /** @class */ (function () {
     function GridStackPipe() {
     }
-    /**
-     * @param {?} value
-     * @param {?=} args
-     * @return {?}
-     */
     GridStackPipe.prototype.transform = function (value, args) {
         if (args === void 0) { args = null; }
         return value;
     };
+    GridStackPipe = __decorate$4([
+        Pipe({
+            name: 'gridStackPipe'
+        }),
+        Injectable()
+    ], GridStackPipe);
     return GridStackPipe;
 }());
-GridStackPipe.decorators = [
-    { type: Pipe, args: [{
-                name: 'gridStackPipe'
-            },] },
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-GridStackPipe.ctorParameters = function () { return []; };
 
-var GridStackService = (function () {
+var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var GridStackService = /** @class */ (function () {
     function GridStackService() {
     }
+    GridStackService = __decorate$5([
+        Injectable(),
+        __metadata$3("design:paramtypes", [])
+    ], GridStackService);
     return GridStackService;
 }());
-GridStackService.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-GridStackService.ctorParameters = function () { return []; };
 
-var GridStackModule = (function () {
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var GridStackModule = /** @class */ (function () {
     function GridStackModule() {
     }
-    /**
-     * @return {?}
-     */
+    GridStackModule_1 = GridStackModule;
     GridStackModule.forRoot = function () {
         return {
-            ngModule: GridStackModule,
+            ngModule: GridStackModule_1,
             providers: [GridStackService]
         };
     };
+    var GridStackModule_1;
+    GridStackModule = GridStackModule_1 = __decorate([
+        NgModule({
+            imports: [
+                CommonModule
+            ],
+            declarations: [
+                GridStackComponent,
+                GridStackItemComponent,
+                GridStackDirective,
+                GridStackPipe
+            ],
+            exports: [
+                GridStackComponent,
+                GridStackItemComponent,
+                GridStackDirective,
+                GridStackPipe
+            ]
+        })
+    ], GridStackModule);
     return GridStackModule;
 }());
-GridStackModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                declarations: [
-                    GridStackComponent,
-                    GridStackItemComponent,
-                    GridStackDirective,
-                    GridStackPipe
-                ],
-                exports: [
-                    GridStackComponent,
-                    GridStackItemComponent,
-                    GridStackDirective,
-                    GridStackPipe
-                ]
-            },] },
-];
-/**
- * @nocollapse
- */
-GridStackModule.ctorParameters = function () { return []; };
 
 export { GridStackModule, GridStackComponent, GridStackItemComponent, GridStackDirective, GridStackPipe, GridStackService, GridStackOptions, GridStackItem };

@@ -21,9 +21,9 @@
   "jsnext:main": "ng4-gridstack.js",
   "typings": "ng4-gridstack.d.ts",
   "peerDependencies": {
-    "@angular/core": "^4.0.0",
+    "@angular/core": "^9.1.13",
     "gridstack": "^0.5.5",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "rxjs": "^6.6.3",
+    "zone.js": "~0.10.3"
   }
 }

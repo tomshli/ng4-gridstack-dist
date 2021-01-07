@@ -11,7 +11,7 @@ export declare class GridStackItemComponent implements OnInit, OnDestroy, AfterV
     jGridRef: any;
     jWidgetRef: any;
     constructor(el: ElementRef, renderer: Renderer2);
-    readonly nativeElement: HTMLElement;
+    get nativeElement(): HTMLElement;
     ngOnInit(): void;
     UpdateWidget(item: GridStackItem): void;
     RenderWidget(item: GridStackItem): void;
