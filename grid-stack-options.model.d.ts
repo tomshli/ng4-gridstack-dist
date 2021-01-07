@@ -1,4 +1,4 @@
-import 'gridstack/dist/gridstack';
+import 'gridstack';
 export declare class GridStackOptions implements GridStackOptions {
     acceptWidgets: boolean;
     alwaysShowResizeHandle: boolean;
