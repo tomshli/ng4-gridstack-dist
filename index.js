@@ -4,6 +4,7 @@ import 'gridstack/dist/gridstack';
 import * as jqueryProxy from 'jquery';
 import jqueryProxy__default from 'jquery';
 import { each } from 'lodash';
+import 'gridstack';
 
 var GridStackOptions = /** @class */ (function () {
     function GridStackOptions() {
